@@ -21,7 +21,8 @@ Pour y arriver, les objectifs sont les suivants :
 	- supporter HTTP/2,
 	- gérer la négociation `Accept` (webp, apng…),
 	- gérer la négociation `Accept-Encoding` (gzip, deflate, br…),
-	- gérer la mise en cache par le navigateur
+	- gérer la mise en cache par le navigateur,
+	- utiliser un niveau de compression élevé (Zopfli, Brotli, WEBP…)
 - supporter des protocoles récents
 	- supporter HTTP/2,
 	- supporter TLS 1.3
