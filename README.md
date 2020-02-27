@@ -111,7 +111,7 @@ Une fois le fichier modifié, relancer Nginx :
 Préparer les fichiers
 ---------------------
 
-La configuration Nginx static ne compresse aucun fichier à la volée contrairement à ce que l’on peut observer dans d’autres configurations. C’est parfaitement volontaire afin d’allonger le plus possible le travail du serveur web.
+La configuration Nginx static ne compresse aucun fichier à la volée contrairement à ce que l’on peut observer dans d’autres configurations. C’est parfaitement volontaire afin de limiter le plus possible le travail du serveur web.
 
 Cela permet également de pousser le niveau de compression de chaque fichier, ce qui ne serait pas envisageable dans le cas d’une compression à la volée.
 
