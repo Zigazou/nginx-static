@@ -34,6 +34,8 @@ Pour y arriver, les objectifs sont les suivants :
 - limiter le nombre de dépendances,
 - utiliser des paquets officiels (proscrire la compilation).
 
+**Attention !** Le fichier `default.conf` fourni ici utilise nativement un certificat auto-signé, c’est à vous d’installer votre certificat !
+
 Le serveur
 ----------
 
