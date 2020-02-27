@@ -1,17 +1,42 @@
 Nginx static
 ============
 
-Ce tutoriel explique comment configurer un serveur Nginx de fichiers statiques avec les caractéristiques suivantes :
+Ce tutoriel explique comment configurer un serveur Nginx de fichiers statiques.
 
-- serveur de fichiers pré-compressés (optimisé pour les petits processeurs),
-- support de HTTP/2 et TLS 1.3,
-- prise en charge de la négociation pour l’encodage GZip et Brotli (content-encoding),
-- prise en charge de la négociation pour le format d’image WEBP (content-type),
-- pas de compression à la volée,
-- aucun module Nginx supplémentaire à installer.
+Offrir de bonnes performances sur des configurations limitées
+-------------------------------------------------------------
 
-Installation Debian 10.3 (Buster)
----------------------------------
+Le but de cette configuration est d’**offrir de bonnes performances sur des configurations limitées**.
+
+Pour y arriver, les objectifs sont les suivants :
+
+- limiter la consommation processeur
+	- servir des ressources statiques,
+	- servir des ressources pré-compressées,
+	- ne pas compresser à la volée
+- limiter la consommation de la RAM
+	- utiliser Nginx sans module supplémentaire,
+	- ne pas utiliser de système de cache
+- limiter l’utilisation des ressources réseau
+	- supporter HTTP/2,
+	- gérer la négociation `Accept` (webp, apng…),
+	- gérer la négociation `Accept-Encoding` (gzip, deflate, br…),
+	- gérer la mise en cache par le navigateur
+- supporter des protocoles récents
+	- supporter HTTP/2,
+	- supporter TLS 1.3
+
+À cela vient s’ajouter la contrainte d’un bon niveau de sécurité :
+
+- limiter le recours aux langages dynamiques (PHP, Python…),
+- abandonner les protocoles obsolètes,
+- limiter le nombre de dépendances,
+- utiliser des paquets officiels (proscrire la compilation).
+
+Le serveur
+----------
+
+### Installer Debian 10.3 (Buster)
 
 Récupérer une [image ISO pour installer Debian](https://www.debian.org/distrib/netinst).
 
@@ -32,8 +57,7 @@ Lancer l’installation en mode texte.
 	[*] serveur SSH
 	[*] utilitaires usuels du système
 
-Ajout de paquets
-----------------
+### Installer les paquets
 
 Installer les paquets suivants en tant qu’utilisateur `root`:
 
@@ -58,8 +82,7 @@ Utilisez les commandes suivantes :
 	apt install -y webp libjpeg-progs zopfli brotli jpegoptim optipng pngnq pngcrush
 	apt install -y curl gnupg2 ca-certificates lsb-release ssl-cert
 
-Installation de Nginx
----------------------
+### Installer Nginx
 
 Nous n’utiliserons pas les paquets officiels Debian mais directement ceux fournis par Nginx.org.
 
@@ -74,8 +97,7 @@ Hormis de profiter d’une version stable plus récente que celle fournie par De
 
 Au moment d’écrire ces lignes, la version stable de Nginx est la 1.16.1.
 
-Configuration de Nginx
-----------------------
+### Configurer Nginx
 
 Écraser le fichier `/etc/nginx/conf.d/default.conf` avec le [fichier default.conf](default.conf) que vous modifierez à votre convenance.
 
